@@ -1,0 +1,42 @@
+<app-header-simple></app-header-simple>
+
+<div class="dashboard-container">
+  <div class="content">
+    <h1 class="title-dashboard">Hola, Bienvenido a EST-SOFTWARE</h1>
+    <p class="dashboard-description">Aquí puedes ver el estado de tus citas.</p>
+
+    <table class="citas-table" *ngIf="citas && citas.length > 0; else noData">
+      <thead>
+        <tr>
+          <th class="column-header">Nombre del Cliente</th>
+          <th class="column-header">Fecha de la Prueba</th>
+          <th class="column-header">Ubicación</th>
+          <th class="column-header">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cita of citas">
+          <td class="column-data">{{ cita?.client_id }}</td>
+          <td class="column-data">
+            <span *ngIf="cita?.test_date?.Time">
+              {{ cita?.test_date?.Time | date: 'short' }}
+            </span>
+            <span *ngIf="!cita?.test_date?.Time">
+              Fecha no válida
+            </span>
+          </td>
+          <td class="column-data">{{ cita?.location }}</td>
+          <td class="column-data">
+            <span [ngClass]="getStatusClass(cita.status)">
+              {{ cita?.status }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #noData>
+      <p>No hay citas disponibles.</p>
+    </ng-template>
+  </div>
+</div>

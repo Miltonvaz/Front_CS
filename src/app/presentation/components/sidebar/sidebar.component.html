@@ -1,0 +1,27 @@
+<div class="sidebar">
+    <div class="logo-container">
+        <img src="pngegg.png" alt="logo" class="logo">
+    </div>
+    <ul class="menu">
+        <li class="menu-item">
+            <a (click)="sendDashboard($event)" routerLinkActive="active" class="menu-link">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+        </li>
+        <li class="menu-item">
+            <a (click)="agregarCarros($event)" routerLinkActive="active" class="menu-link">
+                <i class="fas fa-car"></i> Agregar Carros
+            </a>
+        </li>
+        <li class="menu-item">
+            <a (click)="verCarros($event)" routerLinkActive="active" class="menu-link">
+                <i class="fas fa-eye"></i> Ver Carros
+            </a>
+        </li>
+        <li class="menu-item">
+            <a (click)="verCitas($event)" routerLinkActive="active" class="menu-link">
+                <i class="fas fa-calendar-check"></i> Ver Citas
+            </a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,11 @@
+<app-header-simple></app-header-simple>
+
+<form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+  <label class="form-label" for="email">Ingrese su email</label>
+  <input class="form-input" type="email" id="email" formControlName="email" placeholder="Ingrese su email">
+
+  <label class="form-label" for="password">Ingrese su contraseña</label>
+  <input class="form-input" type="password" id="password" formControlName="password" placeholder="Ingrese su contraseña">
+
+  <button class="btn-login" type="submit">Ingresar</button>
+</form>

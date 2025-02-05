@@ -1,0 +1,85 @@
+/* Contenedor principal del formulario */
+.login-form {
+    background-color: white;
+    padding: 30px 50px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    margin: 100px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+/* Estilos para las secciones del formulario */
+.form-left, .form-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espaciado entre los campos */
+}
+
+/* Etiquetas e inputs del formulario */
+.form-label,
+.form-input {
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+}
+
+.form-label {
+    margin-bottom: 10px;
+}
+
+.form-input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+    font-size: 16px;
+}
+
+.form-input:focus {
+    border-color: #BC955C;
+    outline: none;
+}
+
+/* Estilo de los botones */
+.btn-login {
+    width: 100%;
+    font-weight: bold;
+    font-family: "Parkinsans", sans-serif;
+    font-size: 18px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #FF5733;
+    color: #fff;
+    border: none;
+    height: 55px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    margin-top: 20px;
+}
+
+.btn-login:hover {
+    background-color: #c93a19;
+}
+
+/* Enlace para iniciar sesión */
+.btn-link {
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FF5733;
+    text-decoration: none;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: color 0.3s ease-in-out;
+}
+
+.btn-link:hover {
+    color: #c93a19;
+    text-decoration: underline;
+}

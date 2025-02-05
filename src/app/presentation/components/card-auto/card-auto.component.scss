@@ -1,0 +1,85 @@
+.car-card {
+    background-color: #fff;
+    width: 350px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border: 2px solid #ddd;
+    overflow: hidden;
+    margin: 20px auto;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.car-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.car-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.car-info {
+    padding: 20px;
+    text-align: left;
+}
+
+.car-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.car-details {
+    font-size: 16px;
+    color: #555;
+    margin: 6px 0;
+}
+
+.car-availability {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.available {
+    color: #28a745;
+}
+
+.not-available {
+    color: #dc3545;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: translateY(-3px);
+}
+
+button:focus {
+    outline: none;
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}

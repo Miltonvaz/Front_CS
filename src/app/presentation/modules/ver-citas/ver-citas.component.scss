@@ -1,0 +1,151 @@
+.dashboard-container {
+  display: flex;
+  margin-top: 80px;
+}
+
+.content {
+  margin-left: 250px;
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.tittle-dashboard {
+  font-family: 'Inter', sans-serif;
+  font-size: 44px;
+}
+
+.dashboard-description {
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.table-container {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f4f4f9;
+}
+
+.table-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.citas-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.column-header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.column-data {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.citas-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.citas-table tr:hover {
+  background-color: #ddd;
+}
+
+.status-pending {
+  color: orange;
+  font-weight: bold;
+}
+
+.status-in-progress {
+  color: blue;
+  font-weight: bold;
+}
+
+.status-completed {
+  color: green;
+  font-weight: bold;
+}
+
+.status-unknown {
+  color: gray;
+  font-weight: bold;
+}
+
+.alert-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  max-width: 300px;
+}
+
+.alert {
+  margin-bottom: 10px;
+}
+
+.close {
+  font-size: 1.2rem;
+}
+
+.status-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s, transform 0.3s ease-in-out;
+}
+
+.status-button:hover {
+  transform: scale(1.05);
+}
+
+.status-pending .status-button {
+  background-color: orange;
+}
+
+.status-in-progress .status-button {
+  background-color: blue;
+}
+
+.status-completed .status-button {
+  background-color: green;
+}
+
+.status-unknown .status-button {
+  background-color: gray;
+}
+
+.status-column {
+  text-align: right; 
+}
+
+.status-button-container {
+  text-align: right;
+  
+}.status-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  
+}
+
+.status-button-container {
+  margin-left: 10px;
+  text-align: right;
+}
+
+.status-column {
+  text-align: left; 
+}
+

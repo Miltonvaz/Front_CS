@@ -1,0 +1,17 @@
+<div class="car-card">
+  <img class="car-image" [src]="imageUrl" alt="Imagen del coche">
+  <div class="car-info">
+    <h3 class="car-title">{{ make }}</h3>
+    <p class="car-details"><strong>Modelo:</strong> {{ model }}</p>
+    <p class="car-details"><strong>Año:</strong> {{ year }}</p>
+    <p class="car-details"><strong>Kilometraje:</strong> {{ mileage | number }} km</p>
+    <p class="car-details"><strong>Combustible:</strong> {{ fuelType }}</p>
+    <p class="car-availability" [ngClass]="{ 'available': available, 'not-available': !available }">
+      <strong>Disponible:</strong> {{ available ? 'Sí' : 'No' }}
+    </p>
+
+    <button *ngIf="showAvailabilityButton" (click)="toggleAvailability()">
+      {{ available ? 'Marcar como no disponible' : 'Marcar como disponible' }}
+    </button>
+  </div>
+</div>

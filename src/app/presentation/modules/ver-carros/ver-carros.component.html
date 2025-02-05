@@ -1,0 +1,28 @@
+<app-header-simple></app-header-simple>
+
+<div class="dashboard-container">
+  <app-sidebar></app-sidebar>
+  <div class="content">
+    <h1 class="tittle-dashboard">Hola, Bienvenido a EST-SOFTWARE</h1>
+
+    <div class="cars-container">
+      <h2 class="table-title">Lista de Carros</h2>
+      <div class="cars-list">
+        <app-card-auto
+          *ngFor="let car of cars; let i = index"
+          [make]="car.make"
+          [model]="car.model"
+          [year]="car.year"
+          [mileage]="car.mileage"
+          [fuelType]="car.fuelType"
+          [available]="car.available"
+          [carId]="car.id" 
+          [imageUrl]="car.imageUrl ? car.imageUrl : 'https://img.remediosdigitales.com/3c8f42/toyota-corolla-2020_/1366_2000.jpg'"
+          [showAvailabilityButton]="true"  
+          (availabilityChanged)="onAvailabilityChanged($event)">
+        </app-card-auto>
+      </div>
+      
+    </div>
+  </div>
+</div>

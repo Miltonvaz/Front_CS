@@ -1,0 +1,76 @@
+.dashboard-container {
+    display: flex;
+    margin-top: 80px;
+  }
+  
+  .content {
+    margin-left: 250px;
+    padding: 20px;
+    flex-grow: 1;
+  }
+  
+  .tittle-dashboard {
+    font-family: 'Inter', sans-serif;
+    font-size: 44px;
+  }
+  
+  .dashboard-description {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
+  .table-container {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f4f4f9;
+  }
+  
+  .table-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .car-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+  }
+  
+  .table-header {
+    background-color: #4CAF50;
+  }
+  
+  .table-row {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table-cell {
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .toggle-button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .toggle-button:hover {
+    background-color: #45a049;
+  }
+  
+  .status-available {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .status-unavailable {
+    color: red;
+    font-weight: bold;
+  }
+  

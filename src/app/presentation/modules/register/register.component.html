@@ -1,0 +1,28 @@
+<app-header-simple></app-header-simple>
+
+<form class="login-form" [formGroup]="registerForm" (ngSubmit)="register()">
+  <div class="form-left">
+    <label class="form-label" for="name">Ingrese su nombre</label>
+    <input class="form-input" type="text" id="name" formControlName="name" placeholder="Ingrese su nombre">
+
+    <label class="form-label" for="lastname">Ingrese su apellido</label>
+    <input class="form-input" type="text" id="lastname" formControlName="lastname" placeholder="Ingrese su apellido">
+
+    <label class="form-label" for="password">Ingrese su contraseña</label>
+    <input class="form-input" type="password" id="password" formControlName="password" placeholder="Ingrese su contraseña">
+  </div>
+
+  <div class="form-right">
+    <label class="form-label" for="cellphone">Ingrese su número de celular</label>
+    <input class="form-input" type="text" id="cellphone" formControlName="cellphone" placeholder="Ingrese su número de celular">
+
+    <label class="form-label" for="email">Ingrese su email</label>
+    <input class="form-input" type="email" id="email" formControlName="email" placeholder="Ingrese su email">
+
+    <label class="form-label" for="age">Ingrese su edad</label>
+    <input class="form-input" type="number" id="age" formControlName="age" placeholder="Ingrese su edad">
+
+    <button class="btn-login" type="submit">Ingresar</button>
+    <a href="/login" class="btn-link">¿Ya tienes cuenta? Inicia sesión</a>
+  </div>
+</form>

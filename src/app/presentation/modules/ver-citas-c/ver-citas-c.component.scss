@@ -1,0 +1,80 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 80px;
+    padding: 0 20px;
+  }
+  
+  .content {
+    margin: 0 auto;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px; /* Limitar el ancho máximo */
+  }
+  
+  .title-dashboard {
+    font-family: 'Inter', sans-serif;
+    font-size: 44px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .dashboard-description {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #666;
+  }
+  
+  .citas-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .column-header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .column-data {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+    font-size: 14px;
+  }
+  
+  .citas-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .citas-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .status-pending {
+    color: orange;
+    font-weight: bold;
+  }
+  
+  .status-in-progress {
+    color: blue;
+    font-weight: bold;
+  }
+  
+  .status-completed {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .status-unknown {
+    color: gray;
+    font-weight: bold;
+  }
+  

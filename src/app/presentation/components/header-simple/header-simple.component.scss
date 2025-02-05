@@ -1,0 +1,81 @@
+.header-container {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    padding: 15px 30px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.nav-title {
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "Parkinsans", sans-serif;
+    color: #691C32;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-item {
+    font-size: 18px;
+    font-family: "Parkinsans", sans-serif;
+    color: #691C32;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    padding: 5px 0;
+    transition: color 0.3s ease-out;
+}
+
+.nav-item:hover {
+    color: #BC955C;
+}
+
+.nav-item::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: #BC955C;
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 0.3s ease-out;
+}
+
+.nav-item:hover::after {
+    width: 100%;
+}
+
+.btn-login {
+    background-color: #FF5733;
+    color: #FFFFFF;
+    border: none;
+    width: 150px;
+    height: 50px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-family: "Parkinsans", sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-login:hover {
+    background-color: #c93a19;
+}

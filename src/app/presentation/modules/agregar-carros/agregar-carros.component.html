@@ -1,0 +1,44 @@
+<app-header-simple class="header-dashboard"></app-header-simple>
+
+<div class="dashboard-container">
+  <app-sidebar class="sidebar-dashboard"></app-sidebar>
+
+  <div class="content-dashboard">
+    <p class="subtitle-dashboard">Register a new car in the system.</p>
+
+    <form class="car-form" [formGroup]="carForm" (ngSubmit)="registerCar()">
+      <div class="form-group">
+        <label for="make" class="form-label">Marca</label>
+        <input type="text" id="make" class="form-input" formControlName="make" placeholder="Ingrese la marca">
+      </div>
+
+      <div class="form-group">
+        <label for="model" class="form-label">Modelo</label>
+        <input type="text" id="model" class="form-input" formControlName="model" placeholder="Ingrese el modelo">
+      </div>
+
+      <div class="form-group">
+        <label for="year" class="form-label">Año</label>
+        <input type="number" id="year" class="form-input" formControlName="year" placeholder="Ingrese el año">
+      </div>
+
+      <div class="form-group">
+        <label for="mileage" class="form-label">Kilometraje</label>
+        <input type="number" id="mileage" class="form-input" formControlName="mileage" placeholder="Ingrese el kilometraje">
+      </div>
+
+      <div class="form-group">
+        <label for="fuelType" class="form-label">Tipo de Combustible</label>
+        <select id="fuelType" class="form-input" formControlName="fuelType">
+          <option value="">Seleccione el tipo de combustible</option>
+          <option value="Gasoline">Gasolina</option>
+          <option value="Diesel">Diésel</option>
+          <option value="Electric">Eléctrico</option>
+          <option value="Hybrid">Híbrido</option>
+        </select>
+      </div>
+
+      <button type="submit" class="form-button">Register Car</button>
+    </form>
+  </div>
+</div>

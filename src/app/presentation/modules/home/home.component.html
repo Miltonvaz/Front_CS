@@ -1,0 +1,51 @@
+<app-header></app-header>
+
+<section class="promo-section">
+    <h1 class="promo-title">Descubre los Autos Disponibles</h1>
+    <p class="promo-description">Explora nuestra selección de autos y encuentra el que mejor se adapte a ti.</p>
+</section>
+
+<div class="cards-container">
+    <app-card-auto
+          *ngFor="let car of cars; let i = index"
+          [make]="car.make"
+          [model]="car.model"
+          [year]="car.year"
+          [mileage]="car.mileage"
+          [fuelType]="car.fuelType"
+          [available]="car.available"
+          [imageUrl]="car.imageUrl ? car.imageUrl : 'https://img.remediosdigitales.com/3c8f42/toyota-corolla-2020_/1366_2000.jpg'"
+          [showAvailabilityButton]="false"  
+          (click)="onCarSelect(car)">
+    </app-card-auto>
+</div>
+
+<div class="cta-section">
+    <button class="btn-explore">Ver Más Autos</button>
+</div>
+
+<section class="appointment-section">
+    <h2 class="appointment-title">Agenda tu Cita</h2>
+    <p class="appointment-description">Selecciona una fecha, el carro y ubicación para programar tu prueba de manejo.</p>
+    
+    <form class="appointment-form" (ngSubmit)="scheduleAppointment()">
+        <label for="testDate" class="appointment-label">Fecha de la cita:</label>
+        <input type="date" id="testDate" name="testDate" class="appointment-input" [(ngModel)]="testDate" required>
+
+        <label for="location" class="appointment-label">Ubicación:</label>
+        <select id="location" name="location" class="appointment-select" [(ngModel)]="location" required>
+            <option value="" disabled selected>Selecciona una ubicación</option>
+            <option value="cdmx">Ciudad de México</option>
+            <option value="monterrey">Monterrey</option>
+            <option value="guadalajara">Guadalajara</option>
+        </select>
+        
+
+        <label for="carId" class="appointment-label">ID del coche seleccionado:</label>
+        <input type="text" id="carId" name="carId" class="appointment-input" [value]="selectedCar?.id" readonly>
+
+        <button type="submit" class="btn-schedule">Agendar Cita</button>
+    </form>
+</section>
+
+<app-footer></app-footer>
