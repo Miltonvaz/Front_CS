@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
-import { AgendarCitaComponent } from './modules/agendar-cita/agendar-cita.component';
-import { AgregarCarrosComponent } from './modules/agregar-carros/agregar-carros.component';
-import { HomeComponent } from './modules/home/home.component';
-import { LoginComponent } from './modules/login/login.component';
-import { RegisterComponent } from './modules/register/register.component';
-import { VerCarrosComponent } from './modules/ver-carros/ver-carros.component';
-import { VerCitasCComponent } from './modules/ver-citas-c/ver-citas-c.component';
-import { VerCitasComponent } from './modules/ver-citas/ver-citas.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AgendarCitaComponent } from './modules/appointment/agendar-cita/agendar-cita.component';
+import { VerCitasCComponent } from './modules/appointment/ver-citas-c/ver-citas-c.component';
+import { VerCitasComponent } from './modules/appointment/ver-citas/ver-citas.component';
+import { AgregarCarrosComponent } from './modules/cars/agregar-carros/agregar-carros.component';
+import { VerCarrosComponent } from './modules/cars/ver-carros/ver-carros.component';
+import { LoginComponent } from './modules/clients/login/login.component';
+import { RegisterComponent } from './modules/clients/register/register.component';
+import { HomeComponent } from './modules/home/home.component';
 
 
 export const routes: Routes = [

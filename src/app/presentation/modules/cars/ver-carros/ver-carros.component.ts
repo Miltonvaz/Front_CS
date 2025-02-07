@@ -2,15 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-
-import { HeaderSimpleComponent } from "../../components/header-simple/header-simple.component";
-import { SidebarComponent } from "../../components/sidebar/sidebar.component";
-import { CardAutoComponent } from "../../components/card-auto/card-auto.component";
-import { Car } from '../../../core/domain/car/car';
-import { GetAllCarService } from '../../../core/services/cars/getAllCar_services';
-import { UpdateAvailabilityService } from '../../../core/services/cars/updateAvailability_service';
-
-
+import { Car } from '../../../../core/domain/car/car';
+import { GetAllCarService } from '../../../../core/services/cars/getAllCar_services';
+import { UpdateAvailabilityService } from '../../../../core/services/cars/updateAvailability_service';
+import { CardAutoComponent } from '../../../components/card-auto/card-auto.component';
+import { HeaderSimpleComponent } from '../../../components/header-simple/header-simple.component';
+import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-ver-carros',

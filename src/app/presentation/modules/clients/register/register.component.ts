@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HeaderSimpleComponent } from '../../components/header-simple/header-simple.component';
-import { CreateClientService } from '../../../core/services/clients/createClient_service';
+import { CreateClientService } from '../../../../core/services/clients/createClient_service';
+import { HeaderSimpleComponent } from '../../../components/header-simple/header-simple.component';
 
 
 @Component({

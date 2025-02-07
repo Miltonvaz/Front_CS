@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HeaderSimpleComponent } from '../../components/header-simple/header-simple.component';
-import { SidebarComponent } from '../../components/sidebar/sidebar.component';
-
 import Swal from 'sweetalert2';
-import { CreateCarService } from '../../../core/services/cars/createCar_service';
+import { CreateCarService } from '../../../../core/services/cars/createCar_service';
+import { HeaderSimpleComponent } from '../../../components/header-simple/header-simple.component';
+import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
+
 
 @Component({
   selector: 'app-agregar-carros',

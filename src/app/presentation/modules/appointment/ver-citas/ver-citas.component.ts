@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderSimpleComponent } from '../../components/header-simple/header-simple.component';
-import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import Swal from 'sweetalert2';
-import { NotificationService } from '../../../core/services/notification/notification_service';
-import { GetAppointmentsService } from '../../../core/services/appointments/getAllAppointment_service';
-import { UpdateAppointmentStatusService } from '../../../core/services/appointments/updateAppointmenrt_service';
-import { Appointment } from '../../../core/domain/appointment/appointment';
+import { Appointment } from '../../../../core/domain/appointment/appointment';
+import { GetAppointmentsService } from '../../../../core/services/appointments/getAllAppointment_service';
+import { UpdateAppointmentStatusService } from '../../../../core/services/appointments/updateAppointmenrt_service';
+import { NotificationService } from '../../../../core/services/notification/notification_service';
+import { HeaderSimpleComponent } from '../../../components/header-simple/header-simple.component';
+import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
+
 
 @Component({
   selector: 'app-ver-citas',

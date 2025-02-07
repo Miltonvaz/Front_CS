@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HeaderSimpleComponent } from '../../components/header-simple/header-simple.component';
 import Swal from 'sweetalert2';
-import { LoginService } from '../../../core/services/clients/login_service';
+import { LoginService } from '../../../../core/services/clients/login_service';
+import { HeaderSimpleComponent } from '../../../components/header-simple/header-simple.component';
 
 
 @Component({

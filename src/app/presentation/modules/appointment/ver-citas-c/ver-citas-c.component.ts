@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderSimpleComponent } from '../../components/header-simple/header-simple.component';
-import { Appointment } from '../../../core/domain/appointment/appointment';
-import { GetAppointmentsService } from '../../../core/services/appointments/getAllAppointment_service';
-import { CreateAppointmentService } from '../../../core/services/appointments/createAppointment_service';
+import { Appointment } from '../../../../core/domain/appointment/appointment';
+import { CreateAppointmentService } from '../../../../core/services/appointments/createAppointment_service';
+import { GetAppointmentsService } from '../../../../core/services/appointments/getAllAppointment_service';
+import { HeaderSimpleComponent } from '../../../components/header-simple/header-simple.component';
 
 
 @Component({
