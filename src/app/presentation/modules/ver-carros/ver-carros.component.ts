@@ -2,11 +2,15 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { CarsService } from '../../services/cars/cars.service';
-import { Car } from '../../models/car/car';
+
 import { HeaderSimpleComponent } from "../../components/header-simple/header-simple.component";
 import { SidebarComponent } from "../../components/sidebar/sidebar.component";
 import { CardAutoComponent } from "../../components/card-auto/card-auto.component";
+import { Car } from '../../../core/domain/car/car';
+import { GetAllCarService } from '../../../core/services/cars/getAllCar_services';
+import { UpdateAvailabilityService } from '../../../core/services/cars/updateAvailability_service';
+
+
 
 @Component({
   selector: 'app-ver-carros',
@@ -19,17 +23,20 @@ export class VerCarrosComponent implements OnInit, OnDestroy {
   cars: Car[] = [];
   private pollingSubscription!: Subscription;
 
-  constructor(private carsService: CarsService) {}
+  constructor(
+    private getCarsService: GetAllCarService,
+    private updateCarAvailabilityService: UpdateAvailabilityService
+  ) {}
 
   ngOnInit(): void {
     this.fetchCars();
 
     this.pollingSubscription = interval(5000)
-      .pipe(switchMap(() => this.carsService.getCars()))
+      .pipe(switchMap(() => this.getCarsService.getAllCars()))
       .subscribe({
         next: (response) => {
-          if (response && Array.isArray(response.cars)) {
-            this.cars = response.cars;
+          if (response && Array.isArray(response)) {
+            this.cars = response;
           } else {
             console.error('Respuesta inesperada de la API:', response);
           }
@@ -39,10 +46,10 @@ export class VerCarrosComponent implements OnInit, OnDestroy {
   }
 
   fetchCars(): void {
-    this.carsService.getCars().subscribe({
+    this.getCarsService.getAllCars().subscribe({
       next: (response) => {
-        if (response && Array.isArray(response.cars)) {
-          this.cars = response.cars;
+        if (response && Array.isArray(response)) {
+          this.cars = response;
         } else {
           console.error('La propiedad "cars" no es un array:', response);
         }
@@ -52,21 +59,18 @@ export class VerCarrosComponent implements OnInit, OnDestroy {
   }
 
   onAvailabilityChanged(event: { carId: number, availability: boolean }): void {
-    const updatePayload = {
-      available: event.availability
-    };
 
-    this.carsService.updateAvailability(event.carId, updatePayload).subscribe({
+    this.updateCarAvailabilityService.updateAvailability(event.carId, event.availability).subscribe({
       next: (updatedCar: Car) => {
         const car = this.cars.find(car => car.id === event.carId);
         if (car) {
           car.available = updatedCar.available;
         }
       },
-      error: (err) => console.error('Error al actualizar la disponibilidad:', err)
+      error: (err: any) => console.error('Error al actualizar la disponibilidad:', err)
     });
   }
-
+  
   ngOnDestroy(): void {
     if (this.pollingSubscription) {
       this.pollingSubscription.unsubscribe();

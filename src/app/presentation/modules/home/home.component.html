@@ -7,7 +7,7 @@
 
 <div class="cards-container">
     <app-card-auto
-          *ngFor="let car of cars; let i = index"
+        *ngFor="let car of cars let i = index"
           [make]="car.make"
           [model]="car.model"
           [year]="car.year"

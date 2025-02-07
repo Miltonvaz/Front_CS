@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderSimpleComponent } from '../../../components/header-simple/header-simple.component';
-import { AppointmentService } from '../../../services/appointment/appointment.service';
-import { Appointment } from '../../../models/appointment/appointment';
+import { HeaderSimpleComponent } from '../../components/header-simple/header-simple.component';
+import { Appointment } from '../../../core/domain/appointment/appointment';
+import { GetAppointmentsService } from '../../../core/services/appointments/getAllAppointment_service';
+import { CreateAppointmentService } from '../../../core/services/appointments/createAppointment_service';
+
 
 @Component({
   selector: 'app-ver-citas',
@@ -16,11 +18,14 @@ export class VerCitasCComponent implements OnInit, OnDestroy {
   private pollingInterval: any;
   private statusPollingInterval: any;
 
-  constructor(private appointmentService: AppointmentService) {}
+  constructor(
+    private getAppointmentsService: GetAppointmentsService, 
+    private createAppointmentService: CreateAppointmentService 
+  ) {}
 
   ngOnInit() {
     this.loadAppointments();
-    this.startPolling();      
+    this.startPolling();
     this.startStatusPolling();
   }
 
@@ -34,8 +39,8 @@ export class VerCitasCComponent implements OnInit, OnDestroy {
   }
 
   private loadAppointments(): void {
-    this.appointmentService.getAppointments().subscribe(
-      (data) => {
+    this.getAppointmentsService.getAppointments().subscribe(
+      (data: Appointment[]) => {
         this.citas = data.map((appointment: Appointment) => {
           if (appointment.test_date?.Valid) {
             appointment.test_date.Time = appointment.test_date.Time;
@@ -65,8 +70,8 @@ export class VerCitasCComponent implements OnInit, OnDestroy {
     this.statusPollingInterval = setInterval(() => {
       this.citas.forEach(appointment => {
         if (appointment.appointment_id) {
-          this.appointmentService.getAppointmentStatus(appointment.appointment_id).subscribe(
-            (response) => {
+          this.createAppointmentService.createAppointment(appointment).subscribe(
+            (response: Appointment) => { 
               if (response.status !== appointment.status) {
                 appointment.status = response.status;
               }
@@ -100,5 +105,4 @@ export class VerCitasCComponent implements OnInit, OnDestroy {
         return 'status-unknown';
     }
   }
-
 }

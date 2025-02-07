@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { NotificationService } from '../../services/notification/notification.service';
 import { CommonModule } from '@angular/common';
 import { HeaderSimpleComponent } from '../../components/header-simple/header-simple.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
-import { AppointmentService } from '../../services/appointment/appointment.service';
-import { Appointment } from '../../models/appointment/appointment';
 import Swal from 'sweetalert2';
+import { NotificationService } from '../../../core/services/notification/notification_service';
+import { GetAppointmentsService } from '../../../core/services/appointments/getAllAppointment_service';
+import { UpdateAppointmentStatusService } from '../../../core/services/appointments/updateAppointmenrt_service';
+import { Appointment } from '../../../core/domain/appointment/appointment';
 
 @Component({
   selector: 'app-ver-citas',
@@ -17,10 +18,12 @@ import Swal from 'sweetalert2';
 export class VerCitasComponent implements OnInit, OnDestroy {
   citas: Appointment[] = [];
   public notifications: string[] = [];
+  private notificationSubscription: any;
 
   constructor(
     private notificationService: NotificationService,
-    private appointmentService: AppointmentService,
+    private getAppointmentsService: GetAppointmentsService,
+    private updateAppointmentStatusService: UpdateAppointmentStatusService,
     private cdr: ChangeDetectorRef 
   ) {}
 
@@ -30,32 +33,18 @@ export class VerCitasComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.notificationService.stopLongPolling();
+    if (this.notificationSubscription) {
+      this.notificationSubscription.unsubscribe();
+    }
+    this.notificationService.stopPolling();
   }
 
   private startNotificationPolling(): void {
-    this.notificationService.startLongPolling();
-
-    this.notificationService.getNotifications().subscribe({
+    this.notificationSubscription = this.notificationService.getNotifications().subscribe({
       next: (notification) => {
-        console.log('Notificación recibida:', notification);  
-
         if (notification?.appointment?.status) {
           const statusMessage = `Nueva actualización: ${notification.appointment.status}`;
-
-          Swal.fire({
-            title: 'Nueva Notificación',
-            text: statusMessage,
-            icon: 'info',
-            toast: true, 
-            position: 'top-end',
-            timer: 5000, 
-            showConfirmButton: false
-          });
-
-          this.notifications = [...this.notifications, notification.appointment.status];  
-          this.cdr.detectChanges();
-
+          this.showNotification(statusMessage);
           this.loadAppointments();
         }
       },
@@ -63,105 +52,102 @@ export class VerCitasComponent implements OnInit, OnDestroy {
     });
   }
 
-  getStatusClass(status: string): string {
-    const safeStatus = status?.toLowerCase() || 'unknown';
-    switch (safeStatus) {
-      case 'pendiente':
-      case 'pending':
-        return 'status-pending';
-      case 'en proceso':
-      case 'in process':
-        return 'status-in-progress';
-      case 'completado':
-      case 'completed':
-        return 'status-completed';
-      default:
-        return 'status-unknown';
-    }
-  }
-  changeStatus(cita: Appointment): void {
-    const newStatus = this.getNextStatus(cita.status);
-  
-    // Cambiar el estado de la cita de forma inmediata en el frontend
-    cita.status = newStatus;
-  
-    // Actualizar el estado en el backend
-    this.appointmentService.updateAppointmentStatus({ id: cita.appointment_id, status: newStatus }).subscribe(
-      () => {
-        Swal.fire({
-          title: 'Estado actualizado',
-          text: `El estado de la cita ha cambiado a: ${newStatus}`,
-          icon: 'success',
-          confirmButtonText: 'OK'
-        });
-      },
-      (error) => {
-        console.error('Error actualizando el estado:', error);
-        Swal.fire({
-          title: 'Error',
-          text: 'No se pudo actualizar el estado de la cita. Intenta nuevamente.',
-          icon: 'error',
-          confirmButtonText: 'Cerrar'
-        });
-        // Revertir el cambio en caso de error
-        cita.status = this.getPreviousStatus(newStatus);
-      }
-    );
-  }
-  
-  // Método para obtener el estado anterior
-  getPreviousStatus(currentStatus: string): string {
-    switch (currentStatus.toLowerCase()) {
-      case 'en proceso':
-      case 'in process':
-        return 'pendiente';
-      case 'completado':
-      case 'completed':
-        return 'en proceso';
-      default:
-        return 'completado';
-    }
-  }
-  
-  getNextStatus(currentStatus: string): string {
-    switch (currentStatus.toLowerCase()) {
-      case 'pendiente':
-      case 'pending':
-        return 'en proceso';
-      case 'en proceso':
-      case 'in process':
-        return 'completado';
-      case 'completado':
-      case 'completed':
-        return 'pendiente';
-      default:
-        return 'pendiente';
-    }
+  private showNotification(statusMessage: string): void {
+    Swal.fire({
+      title: 'Nueva Notificación',
+      text: statusMessage,
+      icon: 'info',
+      toast: true,
+      position: 'top-end',
+      timer: 5000,
+      showConfirmButton: false
+    });
   }
 
   private loadAppointments(): void {
-    this.appointmentService.getAppointments().subscribe(
+    this.getAppointmentsService.getAppointments().subscribe(
       (data: Appointment[]) => {
         this.citas = data.map((appointment) => ({
           ...appointment,
           test_date: appointment.test_date?.Valid ? appointment.test_date : { Time: null, Valid: false }
         }));
       },
-      (error) => {
-        console.error('Error fetching appointments:', error);
-        if (error.status === 500) {
-          Swal.fire({
-            title: 'Error en el servidor',
-            text: 'Hubo un problema al obtener las citas. Por favor, intenta más tarde.',
-            icon: 'error',
-            confirmButtonText: 'Entendido'
-          });
-        }
+      (error: any) => {
+        console.error('Error al obtener las citas:', error);
+        Swal.fire({
+          title: 'Error',
+          text: error?.message || 'Hubo un problema al obtener las citas. Por favor, intenta más tarde.',
+          icon: 'error',
+          confirmButtonText: 'Entendido'
+        });
       }
     );
   }
 
   dismissAlert(notification: string): void {
     this.notifications = this.notifications.filter((n) => n !== notification);
+  }
+
+  changeStatus(cita: Appointment): void {
+    if (cita.appointment_id !== undefined) {
+      const newStatus = this.getNextStatus(cita.status);
+      cita.status = newStatus;
+
+      this.updateAppointmentStatusService.updateAppointmentStatus(cita.appointment_id, newStatus).subscribe(
+        () => {
+          Swal.fire({
+            title: 'Estado actualizado',
+            text: `El estado de la cita ha cambiado a: ${newStatus}`,
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
+        },
+        (error: any) => {
+          console.error('Error al actualizar el estado:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'No se pudo actualizar el estado de la cita. Intenta nuevamente.',
+            icon: 'error',
+            confirmButtonText: 'Cerrar'
+          });
+          cita.status = this.getPreviousStatus(newStatus);
+        }
+      );
+    } else {
+      console.error('ID de la cita no está definido');
+    }
+  }
+
+  getNextStatus(currentStatus: string): string {
+    switch (currentStatus.toLowerCase()) {
+      case 'pendiente':
+        return 'en proceso';
+      case 'en proceso':
+        return 'completado';
+      case 'completado':
+        return 'pendiente';
+      default:
+        return 'pendiente';
+    }
+  }
+
+  getPreviousStatus(currentStatus: string): string {
+    switch (currentStatus.toLowerCase()) {
+      case 'en proceso':
+        return 'pendiente';
+      case 'completado':
+        return 'en proceso';
+      default:
+        return 'completado';
+    }
+  }
+
+  getStatusClass(status: string): string {
+    const statusMap: { [key: string]: string } = {
+      pendiente: 'status-pending',
+      'en proceso': 'status-in-progress',
+      completado: 'status-completed',
+    };
+    return statusMap[status?.toLowerCase()] || 'status-unknown';
   }
 }

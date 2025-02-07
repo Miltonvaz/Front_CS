@@ -4,22 +4,23 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HeaderSimpleComponent } from '../../components/header-simple/header-simple.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
-import { CarsService } from '../../services/cars/cars.service';
+
 import Swal from 'sweetalert2';
+import { CreateCarService } from '../../../core/services/cars/createCar_service';
 
 @Component({
   selector: 'app-agregar-carros',
   standalone: true,
   imports: [CommonModule, HeaderSimpleComponent, SidebarComponent, ReactiveFormsModule],
   templateUrl: './agregar-carros.component.html',
-  styleUrl: './agregar-carros.component.scss'
+  styleUrls: ['./agregar-carros.component.scss']
 })
 export class AgregarCarrosComponent {
   carForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private carsService: CarsService,
+    private carService: CreateCarService,
     private router: Router
   ) {
     this.carForm = this.fb.group({
@@ -42,7 +43,6 @@ export class AgregarCarrosComponent {
       return;
     }
 
-    // Add 'available: true' to the car form value before submission
     const carData = { ...this.carForm.value, available: true };
 
     Swal.fire({
@@ -54,7 +54,7 @@ export class AgregarCarrosComponent {
       }
     });
 
-    this.carsService.createCar(carData).subscribe({
+    this.carService.createCar(carData).subscribe({
       next: () => {
         Swal.fire({
           title: 'Éxito',
@@ -62,10 +62,10 @@ export class AgregarCarrosComponent {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then(() => {
-          this.router.navigate(['/dashboard']); 
+          this.router.navigate(['/dashboard']);
         });
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error al registrar el carro:', err);
         Swal.fire({
           title: 'Error',

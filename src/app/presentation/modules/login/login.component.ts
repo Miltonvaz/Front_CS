@@ -3,22 +3,23 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HeaderSimpleComponent } from '../../components/header-simple/header-simple.component';
-import { ClientsService } from '../../services/clients/clients.service';
 import Swal from 'sweetalert2';
+import { LoginService } from '../../../core/services/clients/login_service';
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, HeaderSimpleComponent, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
   loginForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private clientsService: ClientsService,
+    private loginService: LoginService,  
     private router: Router
   ) {
     this.loginForm = this.fb.group({
@@ -33,13 +34,13 @@ export class LoginComponent {
       return;
     }
 
-    this.clientsService.login(this.loginForm.value).subscribe({
-      next: (response) => {
-        localStorage.setItem('token', response.token);
+    this.loginService.login(this.loginForm.value).subscribe({
+      next: (response: { token: string; }) => {
+        localStorage.setItem('token', response.token); 
         Swal.fire('Éxito', 'Inicio de sesión exitoso.', 'success');
-        this.router.navigate(['/dashboard']); // Redirige a la página principal
+        this.router.navigate(['/dashboard']);
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error en el inicio de sesión:', err);
         Swal.fire('Error', 'Credenciales incorrectas.', 'error');
       }

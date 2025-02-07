@@ -4,21 +4,22 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HeaderSimpleComponent } from '../../components/header-simple/header-simple.component';
-import { ClientsService } from '../../services/clients/clients.service';
+import { CreateClientService } from '../../../core/services/clients/createClient_service';
+
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, HeaderSimpleComponent, FormsModule, ReactiveFormsModule], 
+  imports: [CommonModule, HeaderSimpleComponent, FormsModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
   registerForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private clientsService: ClientsService,
+    private createClientService: CreateClientService,  
     private router: Router
   ) {
     this.registerForm = this.fb.group({
@@ -37,7 +38,7 @@ export class RegisterComponent {
       return;
     }
 
-    this.clientsService.createClient(this.registerForm.value).subscribe({
+    this.createClientService.createClient(this.registerForm.value).subscribe({
       next: () => {
         Swal.fire('Éxito', 'Registro exitoso. Ahora puedes iniciar sesión.', 'success');
         this.router.navigate(['/login']);
